@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="protoc">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/protoc.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <excluded>
+      <root url="jar://$USER_HOME$/Downloads/protobuf-java-4.28.3.jar!/" />
+    </excluded>
+  </library>
+</component>

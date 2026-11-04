@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "LogProtos";
+
+message LogMessage {
+  enum Severity {
+    DEBUG = 0;
+    INFO  = 1;
+    WARN  = 2;
+    ERROR = 3;
+    FATAL = 4;
+  }
+
+  int64 timestamp = 1;          // creation time, milliseconds since Unix epoch (UTC)
+  optional string source = 2;   // who created the entry and where (e.g. "app@host")
+  Severity severity = 3;
+  string text = 4;              // single-line message body
+}

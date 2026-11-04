@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_outer_classname = "DbProtos";
+
+// ---- Request side -------------------------------------------------------
+
+message GetRecordRequest { int32 index = 1; }
+message AddRecordRequest { int32 index = 1; string record = 2; }
+message GetSizeRequest   { }
+
+message RPC_Request {
+  enum Operation {
+    UNKNOWN    = 0;   // proto3 requires the first enum value to be 0
+    GET_RECORD = 1;
+    ADD_RECORD = 2;
+    GET_SIZE   = 3;
+  }
+  Operation operation = 1;
+
+  // Only the argument matching 'operation' is set.
+  GetRecordRequest get_record_arg = 2;
+  AddRecordRequest add_record_arg = 3;
+  GetSizeRequest   get_size_arg   = 4;
+}
+
+// ---- Response side ------------------------------------------------------
+
+message GetRecordResponse { bool found = 1; string record = 2; }
+message AddRecordResponse { bool success = 1; }
+message GetSizeResponse   { int32 size = 1; }
+
+message RPC_Response {
+  RPC_Request.Operation operation = 1;
+
+  GetRecordResponse get_record_result = 2;
+  AddRecordResponse add_record_result = 3;
+  GetSizeResponse   get_size_result   = 4;
+
+  string error = 5;   // non-empty if the request could not be processed
+}
